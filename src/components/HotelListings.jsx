@@ -4,16 +4,23 @@ import HotelCard from "./HotelCard";
 import LocationTab from "./locationTab";
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
-import { getHotels } from "@/lib/api/hotels";
+import { setUser } from "@/lib/features/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useGetHotelsQuery } from "@/lib/api";
 
 
 
 export default function HotelListings(){
 
-    const [hotels, setHotels] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [isError, setIsError] = useState(false);
-    const [error, setError] = useState("");
+    // const [hotels, setHotels] = useState([]);
+    // const [isLoading, setIsLoading] = useState(true);
+    // const [isError, setIsError] = useState(false);
+    // const [error, setError] = useState("");
+
+    const {data: hotels, isLoading, isError, error} = useGetHotelsQuery();
+
+    // const dispatch = useDispatch();
+    // const userSlice = useSelector((state)=> state.user);
 
     const locations = ["All", "France", "Italy", "Australia", "Japan"]
 
@@ -28,24 +35,24 @@ export default function HotelListings(){
         return hotel.location.toLocaleLowerCase().includes(selectedLocation.toLocaleLowerCase())  
      })
 
-     useEffect(() => {
+    //  useEffect(() => {
        
-                getHotels().then((data) =>{
-                  setHotels(data)
+    //             getHotels().then((data) =>{
+    //               setHotels(data)
         
-                })
-                .catch((error) =>{
-                    console.log(error.message);
+    //             })
+    //             .catch((error) =>{
+    //                 console.log(error.message);
                     
-                    setIsError(true)
-                    setError(error.message);
+    //                 setIsError(true)
+    //                 setError(error.message);
                     
-                })
-                .finally(() =>{
-                    setIsLoading(false)
-                })     
-     //dependancy array
-     }, []);
+    //             })
+    //             .finally(() =>{
+    //                 setIsLoading(false)
+    //             })     
+    //  //dependancy array
+    //  }, []);
 
 
      if (isLoading) {
@@ -98,6 +105,12 @@ export default function HotelListings(){
     return(
         <section className="px-8 py-8 lg:py-16">
             <div className="mb-12">
+                {/* <p>Hello, {userSlice.user.name}</p>
+                <Button onClick={() =>{
+                        dispatch(setUser({name:"Gayashan"}))
+                }}>
+                    Click me
+                </Button> */}
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">Top trendin hotels worldwide</h2>
                 <p>
                     Discover the most trendin hotels worldwide for an unforgettable experiance

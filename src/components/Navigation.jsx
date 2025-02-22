@@ -1,17 +1,19 @@
 import { Globe } from "lucide-react";
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router";
-
-
+import { useSelector } from "react-redux";
 
 function Navigation(){
+    // const user = useSelector((state) => state.user);
+    // console.log(user);
+    
     return(
         <nav className="z-10 bg-black flex items-center justify-between px-8 text-white py-4">
             <div className="flex items-center space-x-8">
                 <Link to={'/'} className="text-2xl font-bold"> Horizone</Link>
                 <div className="hidden md:flex space-x-6">
                 <Link to={'/'} className="transition-colors"> Home</Link> 
-                <Link to={'/hotels/:id'} className="transition-colors"> Hotel</Link>     
+                <Link to={'/hotels/create'} className="transition-colors"> Create Hotel</Link>     
                 </div>
             </div>
 

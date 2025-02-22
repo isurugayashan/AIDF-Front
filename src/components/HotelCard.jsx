@@ -1,23 +1,24 @@
 import { Globe, MapPin, Star } from "lucide-react";
 import { Button } from "@/components/ui/button"
 import { useState } from "react";
+import { Link } from "react-router";
 
 
 export default function HotelCard(props){
 
-    //arry destructuring
-    const [num, setNum]  = useState(1)
+    // //arry destructuring
+    // const [num, setNum]  = useState(1)
 
-    const handleFunction = (e) =>{
-        // setNum(num +1);
+    // const handleFunction = (e) =>{
+    //     // setNum(num +1);
         
-        // setNum( num => num +1); 
+    //     // setNum( num => num +1); 
 
         
-    }
+    // }
 
     return( 
-        <div href={`/props.hotel/${props.hotel._id}`}
+        <Link to={`/hotels/${props.hotel._id}`}
                     key={props.hotel._id}
                     className="block group relative"  >
 
@@ -48,6 +49,6 @@ export default function HotelCard(props){
 
                         
                     </div>
-                </div> 
+                </Link> 
     );
 };
