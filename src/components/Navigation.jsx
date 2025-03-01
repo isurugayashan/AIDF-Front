@@ -2,6 +2,7 @@ import { Globe } from "lucide-react";
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router";
 import { useSelector } from "react-redux";
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 
 function Navigation(){
     // const user = useSelector((state) => state.user);
@@ -23,13 +24,20 @@ function Navigation(){
                     EN
                </Button>
             
-                <Button variant="ghost" asChild>
-                <Link to="/sign-in" className="transition-colors">  Login In</Link>  
-                </Button>
-                <Button asChild>
-                <Link to="/sign-up"  className="transition-colors"> Sign Up </Link>   
-                </Button>
-
+                <SignedOut>
+                    <Button variant="ghost" asChild>
+                    <Link to="/sign-in" className="transition-colors">  Login In</Link>  
+                    </Button>
+                    <Button asChild>
+                    <Link to="/sign-up"  className="transition-colors"> Sign Up </Link>   
+                    </Button>
+                </SignedOut>
+                <SignedIn>
+                    <UserButton />
+                    <Button asChild>
+                    <Link to="/account"  className="transition-colors">My Account </Link>   
+                    </Button>
+                </SignedIn>
             </div>
         </nav>
     );

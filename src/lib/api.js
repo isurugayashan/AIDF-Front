@@ -26,5 +26,5 @@ export const api = createApi({
 });
 
 //get -> quey
-//put p  ost delete -> mutation
+//put post delete -> mutation
 export const {useGetHotelsQuery, useGetHotelByIdQuery, useCreateHotelMutation} = api;

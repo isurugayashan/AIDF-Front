@@ -4,7 +4,6 @@ import HotelCard from "./HotelCard";
 import LocationTab from "./locationTab";
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
-import { setUser } from "@/lib/features/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetHotelsQuery } from "@/lib/api";
 
