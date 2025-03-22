@@ -14,15 +14,27 @@ import {
 import { useNavigate, useParams } from "react-router";
 import { Skeleton } from "@/components/ui/skeleton";
 import CreateBookingPage from "./create-booking.page";
+import { useState } from "react";
+import CreateBookingForm from "@/components/CreateBookingFom";
 
 export default function HotelPage() {
   const { id } = useParams();
   const { data: hotel, isLoading, isError, error } = useGetHotelByIdQuery(id);
   const [createBooking , {isLoading: isCreateBookingLoading}] = useCreateBookingMutation();
   const navigate = useNavigate();
-  const createbook = () =>{
-    navigate(`/bookings`, { state: { hotel } });
-  }
+  // const createbook = () =>{
+  //   navigate(`/bookings`, { state: { hotel } });
+  // }
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleBookingComplete = () => {
+    setIsOpen(false); // Close the modal after booking is completed
+  };
+
+  const createbook = () => {
+    setIsOpen(true); // Open the booking form modal
+  };
 
   if (isLoading)
     return (
@@ -144,7 +156,21 @@ export default function HotelPage() {
               <p className="text-2xl font-bold">${hotel.price}</p>
               <p className="text-sm text-muted-foreground">per night</p>
             </div>
-            <Button size="lg" onClick={createbook} hotel = {hotel}>Book Now</Button>
+            <Button size="lg" onClick={createbook}>Book Now</Button>
+            {isOpen && (
+              <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
+                  <div className="bg-white rounded-lg shadow-lg w-96 p-6">
+                    {/* Close Button */}
+                <button
+                  className="absolute top-2 right-2 text-red-700 text-xl font-bold p-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  &times;
+                </button>
+                <CreateBookingForm onBookingComplete={handleBookingComplete} hotel={hotel} />
+                  </div>
+              </div>
+             )}
           </div>
         </div>
       </div>

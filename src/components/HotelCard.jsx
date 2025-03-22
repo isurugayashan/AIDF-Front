@@ -16,6 +16,7 @@ export default function HotelCard(props){
 
         
     // }
+    
 
     return( 
         <Link to={`/hotels/${props.hotel._id}`}

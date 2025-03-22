@@ -73,3 +73,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes siri-glow {
+  0% { border-color: #ff6ec4; }  
+  25% { border-color: #ffcc00; }  
+  50% { border-color: #0fd9ff; }  
+  75% { border-color: #ff4d4d; }  
+  100% { border-color: #ff6ec4; }  
+}
+
+.animate-siri-glow {
+  animation: siri-glow 5s infinite linear;
+  border-width: 2px; /* Increase width */
+    box-shadow: 10 0 2px rgba(255, 110, 196, 0.5); /* Optional glow effect */
+}

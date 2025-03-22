@@ -38,9 +38,28 @@ export const api = createApi({
                 body: booking,
             }),
         }),
+
+        updateBooking: builder.mutation({
+            query: ({ id, booking }) => ({
+              url: `bookings/${id}`,
+              method: "PUT", // Or PATCH depending on your API
+              body: booking,
+            }),
+          }),
+
+        getBookingByuserId: builder.query({
+            query: (userId) => `bookings/${userId}`,
+        }), 
+
+        deleteBooking: builder.mutation({
+            query: (id) => ({
+              url: `bookings/${id}`,
+              method: "DELETE",
+            }),
+          }),
     }),
 });
 
 //get -> quey
 //put post delete -> mutation
-export const {useGetHotelsQuery, useGetHotelByIdQuery, useCreateHotelMutation, useCreateBookingMutation} = api;
+export const {useGetHotelsQuery, useGetHotelByIdQuery, useCreateHotelMutation, useCreateBookingMutation, useGetBookingByuserIdQuery, useDeleteBookingMutation, useUpdateBookingMutation} = api;
