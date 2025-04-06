@@ -40,17 +40,22 @@ const CreateHotelForm = () =>{
         
         const {name, location, image, price, description} = values;
         try {
-            toast.loading("Creating hotel...");
-           await createHotel({
+           await toast.promise(
+            createHotel({
                 name,
                 location,
                 image,               
-                price,
+                price, 
                 description,
-               }).unwrap();
-              toast.success("Hotel created successfully");
+               }).unwrap(),
+               {
+                loading: "Creating hotel..",
+                success: "Hotel created successfully!",
+                error: "Hotel created unsuccessfully",
+              }
+           ) ;   
         } catch (error) {
-            toast.error("Hotel created unsuccessfully");
+            console.error(error);
         }
             
     }

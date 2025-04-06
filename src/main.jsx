@@ -11,13 +11,13 @@ import RootLayout from "./layouts/root.layout";
 import MainLayout from "./layouts/main.layout";
 import HotelsPage from "./pages/hotels.page";
 import { Provider } from "react-redux";
-import store from "./lib/store";
 import CreateHotelPage from "./pages/create-hotel.page";
 import { ClerkProvider } from '@clerk/clerk-react'
 import AccountPage from "./pages/account-page";
 import ProtectedLayout from "./layouts/protected.layout";
 import AdminProtectedLayout from "./layouts/admin.protected.layout";
 import CreateBookingPage from "./pages/create-booking.page";
+import { store } from "./lib/store";
 
 // Import your Publishable Key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY

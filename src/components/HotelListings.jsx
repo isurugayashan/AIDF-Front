@@ -5,56 +5,30 @@ import LocationTab from "./locationTab";
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { useDispatch, useSelector } from "react-redux";
-import { useGetHotelsQuery } from "@/lib/api";
+import {  useGetHotelsForSearchQueryQuery } from "@/lib/api";
 
 
 
 export default function HotelListings(){
 
-    // const [hotels, setHotels] = useState([]);
-    // const [isLoading, setIsLoading] = useState(true);
-    // const [isError, setIsError] = useState(false);
-    // const [error, setError] = useState("");
+    const searchValue = useSelector((state) => state.search.value);
 
-    const {data: hotels, isLoading, isError, error} = useGetHotelsQuery();
 
-    // const dispatch = useDispatch();
-    // const userSlice = useSelector((state)=> state.user);
+    const {data, isLoading, isError, error} = useGetHotelsForSearchQueryQuery({
+        query: searchValue,
+    });
 
     const locations = ["All", "France", "Italy", "Australia", "Japan"]
+  
 
     const [selectedLocation , setSelectedLocation] = useState("All")
 
     const handleSelectLocation = (location)=>{
         setSelectedLocation(location);    
         }
+
     
-    
-     const filteredHotels =  selectedLocation ==="All"? hotels: hotels.filter((hotel)=>{
-        return hotel.location.toLocaleLowerCase().includes(selectedLocation.toLocaleLowerCase())  
-     })
-
-    //  useEffect(() => {
-       
-    //             getHotels().then((data) =>{
-    //               setHotels(data)
-        
-    //             })
-    //             .catch((error) =>{
-    //                 console.log(error.message);
-                    
-    //                 setIsError(true)
-    //                 setError(error.message);
-                    
-    //             })
-    //             .finally(() =>{
-    //                 setIsLoading(false)
-    //             })     
-    //  //dependancy array
-    //  }, []);
-
-
-     if (isLoading) {
+    if (isLoading) {
         return(<section className="px-8 py-8 lg:py-16">
             <div className="mb-12">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">Top trendin hotels worldwide</h2>
@@ -100,7 +74,15 @@ export default function HotelListings(){
             </div>
         </section>)
      }
+
+
+  
+     const hotels = data.map((hotel) => hotel.hotel);
     
+     const filteredHotels =  selectedLocation ==="All"? hotels: hotels.filter((hotel)=>{
+        return hotel.location.toLocaleLowerCase().includes(selectedLocation.toLocaleLowerCase())  
+     })
+
     return(
         <section className="px-8 py-8 lg:py-16">
             <div className="mb-12">
@@ -134,3 +116,31 @@ export default function HotelListings(){
     );
 };
 
+// const [hotels, setHotels] = useState([]);
+    // const [isLoading, setIsLoading] = useState(true);
+    // const [isError, setIsError] = useState(false);
+    // const [error, setError] = useState("");
+
+
+    // const dispatch = useDispatch();
+    // const userSlice = useSelector((state)=> state.user);
+
+
+  //  useEffect(() => {
+       
+    //             getHotels().then((data) =>{
+    //               setHotels(data)
+        
+    //             })
+    //             .catch((error) =>{
+    //                 console.log(error.message);
+                    
+    //                 setIsError(true)
+    //                 setError(error.message);
+                    
+    //             })
+    //             .finally(() =>{
+    //                 setIsLoading(false)
+    //             })     
+    //  //dependancy array
+    //  }, []);

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { useState } from "react";
-import { useCreateBookingMutation, useUpdateBookingMutation } from "@/lib/api";
+import { useCreateBookingMutation, useUpdateBookingMutation , useGetBookingByuserIdQuery} from "@/lib/api";
 import { toast } from "sonner";
 import {
   Form,
@@ -38,6 +38,7 @@ const formSchema = z.object({
 });
 
 const CreateBookingForm = ({ onBookingComplete, hotel, existingBooking }) => {
+ 
   const {isLoaded, isSignedIn, user} = useUser();
   const [createBooking] = useCreateBookingMutation();
   const [updateBooking] = useUpdateBookingMutation(); // New hook for updates
@@ -51,6 +52,8 @@ const CreateBookingForm = ({ onBookingComplete, hotel, existingBooking }) => {
       roomNumber: existingBooking?.roomNumber || "",
     },
   });
+
+  const {data: bookings , isLoading , isError, refetch} = useGetBookingByuserIdQuery(user.id);
 
   const handleSubmit = async (values) => {
     const { checkIn, checkOut, roomNumber } = values;
@@ -74,9 +77,9 @@ const CreateBookingForm = ({ onBookingComplete, hotel, existingBooking }) => {
             loading: "Updating booking...",
             success: "Booking updated successfully!",
             error: "Booking update failed",
-          }
+          }, 
         );
-        onBookingComplete(); 
+        await refetch()
       } else {
         // Create new booking
         await toast.promise(
@@ -93,7 +96,7 @@ const CreateBookingForm = ({ onBookingComplete, hotel, existingBooking }) => {
           }
         );
       }
-
+      
       onBookingComplete(); // Close modal or refresh data
     } catch (error) {
       console.error(error);

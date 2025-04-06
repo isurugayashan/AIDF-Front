@@ -1,14 +1,21 @@
 import { Globe, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button"
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { submit } from "@/lib/features/searchSlice";
 
 
 
 export default function Hero(){
+
+    const dispatch = useDispatch();
   
-        const handlSearch = (e)=>{
-            e.preventDeFault();
-        }
+    const handleSearch = (e) => {
+      e.preventDefault();
+      const searchQuery = e.target.search.value;
+  
+      dispatch(submit(searchQuery));
+    };
         const [isHovered, setIsHovered] = useState(false); 
 
         return (
@@ -24,7 +31,7 @@ export default function Hero(){
     
                     {/* Search Form */}
                     <form
-                        onSubmit={handlSearch}
+                        onSubmit={handleSearch}
                         className="relative w-full max-w-3xl bg-black/10 backdrop-blur-md lg:h-16 rounded-full p-2 flex items-center transition-all duration-500 ease-in-out"
                         onMouseEnter={() => setIsHovered(true)}
                         onMouseLeave={() => setIsHovered(false)}
@@ -48,6 +55,7 @@ export default function Hero(){
     
                         <input
                             type="text"
+                            name="search"
                             placeholder="Describe your destination, experience, or hotel"
                             className="relative flex-grow bg-transparent lg:text-lg text-white text-center placeholder:text-white/50 border-none outline-none focus:border-none focus:outline-none z-10"
                         />

@@ -1,21 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
-import {setupListeners} from "@reduxjs/toolkit/query"
-import { api } from "./api";
+import { setupListeners } from "@reduxjs/toolkit/query";
 
+import { api } from "./api";
+import searchReducer from "./features/searchSlice";
 
 export const store = configureStore({
-    reducer: {
-        // user: userReducer,
-        [api.reducerPath] : api.reducer,
-    },
-    devTools: true,
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(api.middleware),
+  reducer: {
+    [api.reducerPath]: api.reducer,
+    search: searchReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(api.middleware),
 });
 
-
 setupListeners(store.dispatch);
-
-export default store;
 
 //reduce is like a thing, that combine data and action at one single sote
