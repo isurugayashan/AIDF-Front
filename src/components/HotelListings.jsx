@@ -1,7 +1,7 @@
 
 import { Toggle } from "@radix-ui/react-toggle";
 import HotelCard from "./HotelCard";
-import LocationTab from "./locationTab";
+import LocationTab from "./LocationTab";
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { useDispatch, useSelector } from "react-redux";
