@@ -35,16 +35,17 @@ const AccountPage = () =>{
       setSelectedBooking(booking);
       setIsUpdateModalOpen(true);
      };
+
     const handleDeleteClick = (booking) => {
       setSelectedBooking(booking); // Store selected booking
       setShowDeletePopup(true); // Show the confirmation popup
     };
 
-  // Function to close the modal
-  const handleCloseModal = () => {
-      setIsUpdateModalOpen(false);
-      setSelectedBooking(null);
-  };
+     // Function to close the modal
+    const handleCloseModal = () => {
+        setIsUpdateModalOpen(false);
+        setSelectedBooking(null);
+    };
 
     // Calculate days between check-in and check-out
     const calculateDays = (checkIn, checkOut) => {

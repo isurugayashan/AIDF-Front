@@ -77,9 +77,9 @@ const CreateBookingForm = ({ onBookingComplete, hotel, existingBooking }) => {
             loading: "Updating booking...",
             success: "Booking updated successfully!",
             error: "Booking update failed",
-          }, 
+          }
         );
-        await refetch()
+        refetch();
       } else {
         // Create new booking
         await toast.promise(
