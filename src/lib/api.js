@@ -21,14 +21,13 @@ export const api = createApi({
         getHotels: builder.query({
             query: () => "hotels",
         }),
-        getHotelById: builder.query({
-            query: (id) => `hotels/${id}`,
-        }), 
 
         getHotelsForSearchQuery: builder.query({
-            query: ({ query }) => `hotels/search/retrieve?query=${query}`,
-          }),
-
+          query: ({ query }) => `hotels/search/retrieve?query=${query}`,
+        }),
+        getHotelById: builder.query({
+            query: (id) => `hotels/${id}`,
+        }),
         createHotel : builder.mutation({
             query: (hotel) =>({
                 url: "hotels",
