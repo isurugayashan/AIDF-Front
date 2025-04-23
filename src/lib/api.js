@@ -6,7 +6,7 @@ const BACKEND_URL = "http://localhost:8000";
 
 export const api = createApi({
     baseQuery: fetchBaseQuery({
-        baseUrl: "https://aidf-horizone-backend-isuru.onrender.com/api",
+        baseUrl: "https://aidf-horizone-backend-isuru.onrender.com/api/",
         prepareHeaders: async (headers, { getState }) => {
           const token = await window.Clerk?.session?.getToken();
           if (token) {
