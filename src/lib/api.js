@@ -6,7 +6,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const api = createApi({
     baseQuery: fetchBaseQuery({
-      reducerPath: "api",
+         reducerPath: "api",
        baseUrl: `${BACKEND_URL}/api/`,
         prepareHeaders: async (headers, { getState }) => {
           const token = await window.Clerk?.session?.getToken();
