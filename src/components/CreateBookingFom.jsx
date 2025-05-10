@@ -61,10 +61,9 @@ const CreateBookingForm = ({ onBookingComplete, hotel, existingBooking }) => {
   
     try {
       if (existingBooking) {
-        // Update booking
         await toast.promise(
           updateBooking({
-            id: existingBooking?._id, 
+            id: existingBooking?._id,
             booking: {
               hotelId: existingBooking?.hotel.id,
               userId: user.id,
@@ -80,9 +79,9 @@ const CreateBookingForm = ({ onBookingComplete, hotel, existingBooking }) => {
           }
         );
         refetch();
+        onBookingComplete(existingBooking._id); // Use the existing ID
       } else {
-        // Create new booking
-        await toast.promise(
+        const createdBooking = await toast.promise(
           createBooking({
             hotelId,
             roomNumber,
@@ -95,13 +94,14 @@ const CreateBookingForm = ({ onBookingComplete, hotel, existingBooking }) => {
             error: "Booking creation failed",
           }
         );
+  
+        onBookingComplete(createdBooking._id); // Send the new ID to HotelPage
       }
-      
-      onBookingComplete(); // Close modal or refresh data
     } catch (error) {
       console.error(error);
     }
   };
+  
 
   return (
     <div className="mx-auto max-w-md space-y-6 p-6 bg-white rounded-lg shadow-md">

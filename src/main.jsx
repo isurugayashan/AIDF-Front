@@ -18,6 +18,8 @@ import ProtectedLayout from "./layouts/protected.layout";
 import AdminProtectedLayout from "./layouts/admin.protected.layout";
 import CreateBookingPage from "./pages/create-booking.page";
 import { store } from "./lib/store";
+import PaymentPage from "./pages/payment.page";
+import CompletePage from "./pages/complete.page";
 
 // Import your Publishable Key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
@@ -40,6 +42,8 @@ createRoot(document.getElementById("root")).render(
                   <Route path="/hotels/:id" element={<HotelPage />} />
                   <Route element={<ProtectedLayout />}>
                     <Route path="/account" element={<AccountPage/>} />
+                    <Route path="/booking/payment" element={<PaymentPage />} />
+                    <Route path="/booking/complete" element={<CompletePage />} />
                     <Route path="/bookings" element={<CreateBookingPage />} />
                     <Route element={<AdminProtectedLayout />}>
                     <Route path="/hotels/create" element={<CreateHotelPage />} />
