@@ -158,7 +158,9 @@ export default function HotelPage() {
               <p className="text-2xl font-bold">${hotel.price}</p>
               <p className="text-sm text-muted-foreground">per night</p>
             </div>
-            <Button size="lg" onClick={createbook}>Book Now</Button>
+           
+            {user?.publicMetadata?.role === "admin"  &&( <Button size="lg" onClick={createbook}>Book Now</Button>) }
+            
             {isOpen && (
               <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
                   <div className="bg-white rounded-lg shadow-lg w-96 p-6">
@@ -169,8 +171,7 @@ export default function HotelPage() {
                 >
                   &times;
                 </button>
-                {user?.publicMetadata?.role === "admin"  &&(<CreateBookingForm onBookingComplete={handleBookingComplete} hotel={hotel} />) }
-                
+                <CreateBookingForm onBookingComplete={handleBookingComplete} hotel={hotel} />
                   </div>
               </div>
              )}
