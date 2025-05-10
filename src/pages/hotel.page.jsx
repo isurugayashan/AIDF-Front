@@ -159,7 +159,7 @@ export default function HotelPage() {
               <p className="text-sm text-muted-foreground">per night</p>
             </div>
            
-            {user?.publicMetadata?.role === "admin" || user?.publicMetadata?.role === "member" &&( <Button size="lg" onClick={createbook}>Book Now</Button>) }
+            {user?.publicMetadata?.role === "admin" &&( <Button size="lg" onClick={createbook}>Book Now</Button>) }
             
             {isOpen && (
               <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
