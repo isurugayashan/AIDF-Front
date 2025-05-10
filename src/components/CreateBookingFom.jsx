@@ -47,8 +47,8 @@ const CreateBookingForm = ({ onBookingComplete, hotel, existingBooking }) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: existingBooking?.hotel.name || hotel?.name || "",
-      checkIn: existingBooking ? new Date(existingBooking.checkIn) : null,
-      checkOut: existingBooking ? new Date(existingBooking.checkOut) : null,
+      checkIn: existingBooking ? new Date(existingBooking.checkIn) : new Date(),
+      checkOut: existingBooking ? new Date(existingBooking.checkOut) : new Date(),
       roomNumber: existingBooking?.roomNumber || "",
     },
   });
