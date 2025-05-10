@@ -57,11 +57,25 @@ export const api = createApi({
             query: (userId) => `bookings/${userId}`,
         }), 
 
+        getBookingById: builder.query({
+          query: (id) => `bookings/${id}`,
+        }),
+
         deleteBooking: builder.mutation({
             query: (id) => ({
               url: `bookings/${id}`,
               method: "DELETE",
             }),
+          }),
+
+          createCheckoutSession: builder.mutation({
+            query: () => ({
+              url: `payments/create-checkout-session`,
+              method: "POST",
+            }),
+          }),
+          getCheckoutSessionStatus: builder.query({
+            query: (sessionId) => `payments/session-status?session_id=${sessionId}`,
           }),
     }),
 });
@@ -69,4 +83,5 @@ export const api = createApi({
 //get -> quey
 //put post delete -> mutation
 export const {useGetHotelsQuery, useGetHotelByIdQuery, useCreateHotelMutation, useCreateBookingMutation, 
-      useGetBookingByuserIdQuery, useDeleteBookingMutation, useUpdateBookingMutation, useGetHotelsForSearchQueryQuery} = api;
+      useGetBookingByuserIdQuery, useDeleteBookingMutation, useUpdateBookingMutation, useGetHotelsForSearchQueryQuery , useGetBookingByIdQuery,  useCreateCheckoutSessionMutation,
+      useGetCheckoutSessionStatusQuery,} = api;
