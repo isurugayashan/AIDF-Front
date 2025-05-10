@@ -5,7 +5,8 @@ import { useGetBookingByIdQuery } from "@/lib/api";
 function PaymentPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const bookingId = searchParams.get("bookingId");
-
+  console.log(bookingId);
+  
   const { data: booking, isLoading: isBookingLoading } =
     useGetBookingByIdQuery(bookingId);
 
