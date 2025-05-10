@@ -16,8 +16,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 import CreateBookingPage from "./create-booking.page";
 import { useState } from "react";
 import CreateBookingForm from "@/components/CreateBookingFom";
+import { useUser } from "@clerk/clerk-react";
 
 export default function HotelPage() {
+  const {user} = useUser();
   const { id } = useParams();
   const { data: hotel, isLoading, isError, error } = useGetHotelByIdQuery(id);
   const [createBooking , {isLoading: isCreateBookingLoading}] = useCreateBookingMutation();
@@ -167,7 +169,8 @@ export default function HotelPage() {
                 >
                   &times;
                 </button>
-                <CreateBookingForm onBookingComplete={handleBookingComplete} hotel={hotel} />
+                {user?.publicMetadata?.role === "admin"  &&(<CreateBookingForm onBookingComplete={handleBookingComplete} hotel={hotel} />) }
+                
                   </div>
               </div>
              )}
