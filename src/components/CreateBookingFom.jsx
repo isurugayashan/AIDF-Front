@@ -79,7 +79,7 @@ const CreateBookingForm = ({ onBookingComplete, hotel, existingBooking }) => {
           }
         );
         refetch();
-        onBookingComplete(existingBooking._id); // Use the existing ID
+        onBookingComplete(existingBooking); // Use the existing ID
       } else {
         const createdBooking = await toast.promise(
           createBooking({
@@ -94,8 +94,7 @@ const CreateBookingForm = ({ onBookingComplete, hotel, existingBooking }) => {
             error: "Booking creation failed",
           }
         );
-  
-        onBookingComplete(createdBooking._id); // Send the new ID to HotelPage
+        onBookingComplete(createdBooking); // Send the new ID to HotelPage
       }
     } catch (error) {
       console.error(error);

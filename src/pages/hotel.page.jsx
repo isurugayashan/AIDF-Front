@@ -30,9 +30,9 @@ export default function HotelPage() {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleBookingComplete = (bookingId) => {
+  const handleBookingComplete = (booking) => {
     setIsOpen(false); // Close the modal after booking is completed
-    navigate(`/booking/payment?bookingId=${bookingId}`);
+    navigate(`/booking/payment?bookingId=${booking._id}`);
   };
 
   const createbook = () => {
