@@ -47,8 +47,8 @@ const CreateBookingForm = ({ onBookingComplete, hotel, existingBooking }) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: existingBooking?.hotel.name || hotel?.name || "",
-      checkIn: existingBooking ? new Date(existingBooking.checkIn) : new Date(),
-      checkOut: existingBooking ? new Date(existingBooking.checkOut) : new Date(),
+      checkIn: existingBooking ? new Date(existingBooking.checkIn) : null,
+      checkOut: existingBooking ? new Date(existingBooking.checkOut) : null,
       roomNumber: existingBooking?.roomNumber || "",
     },
   });
@@ -199,10 +199,12 @@ const CreateBookingForm = ({ onBookingComplete, hotel, existingBooking }) => {
                       mode="single"
                       selected={field.value}
                       onSelect={field.onChange}
-                      disabled={(date) => {
-                        const checkIn = form.getValues("checkIn");
-                        return checkIn ? date <= checkIn : date <= new Date();
-                      }}
+                      // Allow checkout at least one day after check-in
+                        disabled={(date) => {
+                          const checkIn = form.getValues("checkIn");
+                          return checkIn ? date < checkIn : date < new Date();
+                        }}
+
                       initialFocus
                     />
                   </PopoverContent>
