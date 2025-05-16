@@ -9,7 +9,8 @@ import { format } from "date-fns";
 function CompletePage() {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("session_id");
-
+  console.log(sessionId);
+  
   const { data, isLoading, isError } =
     useGetCheckoutSessionStatusQuery(sessionId);
 
