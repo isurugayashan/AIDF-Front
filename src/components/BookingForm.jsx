@@ -33,8 +33,8 @@ export default function BookingForm({ onSubmit, isLoading, hotelId }) {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      checkIn: new Date(),
-      checkOut: tomorrow,
+     checkIn:  null,
+      checkOut: null,
     },
   });
 
