@@ -15,16 +15,13 @@ import { addDays } from "date-fns";
 import { Input } from "./ui/input";
 
 const formSchema = z.object({
+ checkOut: z.date({
+    required_error: "Check-out date is required",
+  }),
   checkIn: z.date({
     required_error: "Check-in date is required",
   }),
-  checkOut: z.date({
-    required_error: "Check-out date is required",
-  }),
-  roomNumber: z.coerce.number().min(1, "Room number is required"),
-}).refine(data => data.checkOut > data.checkIn, {
-  message: "Check-out date must be after check-in date",
-  path: ["checkOut"],
+  roomNumber: z.coerce.number().min(1, "Room number is required")
 });
 
 export default function BookingForm({ onSubmit, isLoading, hotelId }) {
