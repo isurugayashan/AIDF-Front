@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/form";
 import { DatePicker } from "./DatePicker";
 import { addDays } from "date-fns";
+import { Input } from "./ui/input";
 
 const formSchema = z.object({
   checkIn: z.date({
