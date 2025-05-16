@@ -11,32 +11,29 @@ import {
   Wifi,
 } from "lucide-react";
 
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { Skeleton } from "@/components/ui/skeleton";
-import CreateBookingPage from "./create-booking.page";
-import { useState } from "react";
-import CreateBookingForm from "@/components/CreateBookingFom";
-import { useUser } from "@clerk/clerk-react";
+import { BookingDialog } from "@/components/BookingDialog";
+import { useNavigate } from "react-router";
+import { toast } from "sonner";
 
 export default function HotelPage() {
-  const {user} = useUser();
   const { id } = useParams();
   const { data: hotel, isLoading, isError, error } = useGetHotelByIdQuery(id);
-  const [createBooking , {isLoading: isCreateBookingLoading}] = useCreateBookingMutation();
+  const [createBooking, { isLoading: isCreateBookingLoading }] =
+    useCreateBookingMutation();
+
   const navigate = useNavigate();
-  // const createbook = () =>{
-  //   navigate(`/bookings`, { state: { hotel } });
-  // }
 
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleBookingComplete = (booking) => {
-    setIsOpen(false); // Close the modal after booking is completed
-    navigate(`/booking/payment?bookingId=${booking._id}`);
-  };
-
-  const createbook = () => {
-    setIsOpen(true); // Open the booking form modal
+  const handleBook = async (bookingData) => {
+    try {
+      const booking = await createBooking(bookingData).unwrap();
+      navigate(`/booking/payment?bookingId=${booking._id}`);
+      toast.success("Booking successful");
+    } catch (error) {
+      console.log(error);
+      toast.error("Booking failed");
+    }
   };
 
   if (isLoading)
@@ -159,23 +156,12 @@ export default function HotelPage() {
               <p className="text-2xl font-bold">${hotel.price}</p>
               <p className="text-sm text-muted-foreground">per night</p>
             </div>
-           
-            {(user?.publicMetadata?.role === "admin" || user?.publicMetadata?.role === "member") && ( <Button size="lg" onClick={createbook}>Book Now</Button>)}
-            
-            {isOpen && (
-              <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
-                  <div className="bg-white rounded-lg shadow-lg w-96 p-6">
-                    {/* Close Button */}
-                <button
-                  className="absolute top-2 right-2 text-red-700 text-xl font-bold p-2"
-                  onClick={() => setIsOpen(false)}
-                >
-                  &times;
-                </button>
-                <CreateBookingForm onBookingComplete={handleBookingComplete} hotel={hotel} />
-                  </div>
-              </div>
-             )}
+            <BookingDialog
+              hotelName={hotel.name}
+              hotelId={id}
+              onSubmit={handleBook}
+              isLoading={isCreateBookingLoading}
+            />
           </div>
         </div>
       </div>
