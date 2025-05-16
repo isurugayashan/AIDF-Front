@@ -9,7 +9,7 @@ function Navigation(){
     // console.log(user);
     const {user} = useUser();
     return(
-        <nav className="z-10 bg-black flex items-center justify-between px-8 text-white py-4">
+        <nav className="z-10 bg-gray-900 flex items-center justify-between px-8 text-white py-4">
             <div className="flex items-center space-x-8">
                 <Link to={'/'} className="text-2xl font-bold"> CheckinEase </Link>
                 <div className="hidden md:flex space-x-6">
