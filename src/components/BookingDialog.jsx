@@ -23,7 +23,7 @@ export function BookingDialog({ hotelName, hotelId, onSubmit, isLoading }) {
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={setOpen} modal={false}>
       <DialogTrigger asChild>
         <Button size="lg">Book Now</Button>
       </DialogTrigger>
