@@ -55,28 +55,27 @@ export const api = createApi({
           }),
 
         getBookingByuserId: builder.query({
-            query: (userId) => `bookings/${userId}`,
-            providesTags: (result) =>
-                  result
-                    ? [...result.map(({ _id }) => ({ type: "Booking", id: _id })), { type: "Booking", id: "LIST" }]
-                    : [{ type: "Booking", id: "LIST" }],
-              }),
-        }), 
+          query: (userId) => `bookings/${userId}`,
+          providesTags: (result) =>
+            result
+              ? [...result.map(({ _id }) => ({ type: "Booking", id: _id })), { type: "Booking", id: "LIST" }]
+              : [{ type: "Booking", id: "LIST" }],
+        }),
 
         getBookingById: builder.query({
           query: (id) => `bookings/${id}`,
         }),
 
         deleteBooking: builder.mutation({
-            query: (id) => ({
-              url: `bookings/${id}`,
-              method: "DELETE",
-            }),
-            invalidatesTags: (result, error, id) => [
-              { type: "Booking", id },
-              { type: "Booking", id: "LIST" },
-            ],
+          query: (id) => ({
+            url: `bookings/${id}`,
+            method: "DELETE",
           }),
+          invalidatesTags: (result, error, id) => [
+            { type: "Booking", id },
+            { type: "Booking", id: "LIST" },
+          ],
+        }),
 
           createCheckoutSession: builder.mutation({
             query: () => ({
