@@ -16,8 +16,11 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { BookingDialog } from "@/components/BookingDialog";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
+import { SignedIn, SignedOut, UserButton, useUser } from "@clerk/clerk-react";
 
 export default function HotelPage() {
+  const { user } = useUser();
+
   const { id } = useParams();
   const { data: hotel, isLoading, isError, error } = useGetHotelByIdQuery(id);
   const [createBooking, { isLoading: isCreateBookingLoading }] =
@@ -156,12 +159,14 @@ export default function HotelPage() {
               <p className="text-2xl font-bold">${hotel.price}</p>
               <p className="text-sm text-muted-foreground">per night</p>
             </div>
+            {["admin", "member"].includes(user?.publicMetadata?.role) && (
             <BookingDialog
               hotelName={hotel.name}
               hotelId={id}
               onSubmit={handleBook}
               isLoading={isCreateBookingLoading}
             />
+          )}
           </div>
         </div>
       </div>
