@@ -18,6 +18,7 @@ export const api = createApi({
         },
       }),
     //query function
+    tagTypes: ["Hotel", "Booking"], // <-- Add this
     endpoints: (builder)=>({
         getHotels: builder.query({
             query: () => "hotels",
@@ -55,6 +56,11 @@ export const api = createApi({
 
         getBookingByuserId: builder.query({
             query: (userId) => `bookings/${userId}`,
+            providesTags: (result) =>
+                  result
+                    ? [...result.map(({ _id }) => ({ type: "Booking", id: _id })), { type: "Booking", id: "LIST" }]
+                    : [{ type: "Booking", id: "LIST" }],
+              }),
         }), 
 
         getBookingById: builder.query({
@@ -66,6 +72,10 @@ export const api = createApi({
               url: `bookings/${id}`,
               method: "DELETE",
             }),
+            invalidatesTags: (result, error, id) => [
+              { type: "Booking", id },
+              { type: "Booking", id: "LIST" },
+            ],
           }),
 
           createCheckoutSession: builder.mutation({
