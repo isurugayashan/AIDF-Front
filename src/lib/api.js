@@ -53,9 +53,11 @@ export const api = createApi({
             }),
           }),
 
-        getBookingByuserId: builder.query({
-            query: (userId) => `bookings/${userId}`,
-        }), 
+        getBookingByUserId: builder.query({
+          query: (userId) => `bookings/${userId}`,
+            providesTags: (result, error, userId) => [{ type: 'Booking', id: userId }],
+          }),
+
 
         getBookingById: builder.query({
           query: (id) => `bookings/${id}`,
