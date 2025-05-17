@@ -53,24 +53,20 @@ export const api = createApi({
             }),
           }),
 
-        getBookingByUserId: builder.query({
+        getBookingByuserId: builder.query({
             query: (userId) => `bookings/${userId}`,
-            providesTags: (result, error, userId) => [{ type: 'Booking', id: userId }],
-          }),
-
+        }), 
 
         getBookingById: builder.query({
           query: (id) => `bookings/${id}`,
         }),
 
-       deleteBooking: builder.mutation({
-          query: (id) => ({
-            url: `bookings/${id}`,
-            method: "DELETE",
+        deleteBooking: builder.mutation({
+            query: (id) => ({
+              url: `bookings/${id}`,
+              method: "DELETE",
+            }),
           }),
-          // 👇 You must pass userId to this mutation to invalidate the correct cache
-          invalidatesTags: (result, error, { userId }) => [{ type: 'Booking', id: userId }],
-        }),
 
           createCheckoutSession: builder.mutation({
             query: () => ({
