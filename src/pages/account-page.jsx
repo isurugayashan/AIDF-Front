@@ -75,7 +75,7 @@ const AccountPage = () =>{
           error: "Booking deletion failed",
         }
       );
-     // refetch();
+      refetch();
       setShowDeletePopup(false);
      
     } catch (error) {
