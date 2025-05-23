@@ -57,7 +57,7 @@ export default function Hero(){
                             type="text"
                             name="search"
                             placeholder="Describe your destination, experience, or hotel"
-                            className="relative flex-grow bg-transparent lg:text-lg text-white text-center placeholder:text-white/50 border-none outline-none focus:border-none focus:outline-none z-10"
+                            className="relative flex-grow bg-transparent lg:text-lg  text-center placeholder:text-white/50 border-none outline-none focus:border-none focus:outline-none z-10"
                         />
                     </form>
                 </div>
