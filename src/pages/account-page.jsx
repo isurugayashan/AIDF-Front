@@ -177,8 +177,12 @@ const AccountPage = () =>{
                         {calculateDays(booking.checkIn, booking.checkOut) === 1 ? "night" : "nights"}
                       </span>
                     </div>
-                    <Badge variant="secondary">Confirmed</Badge>
-                    <Badge variant="secondary">{booking.paymentStatus}</Badge>
+                    <div className="flex items-center space-x-2">
+                      <Badge variant="default">Confirmed</Badge>
+                      <Badge variant={booking.paymentStatus === "Paid" ? "success" : "destructive"}>
+                        {booking.paymentStatus}
+                      </Badge>
+                    </div>
                   </div>
                 </CardContent>
                 <CardFooter className="px-4 py-3 bg-muted/20 flex justify-between">
