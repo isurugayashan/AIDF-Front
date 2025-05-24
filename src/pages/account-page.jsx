@@ -179,7 +179,7 @@ const AccountPage = () =>{
                     </div>
                     <div className="flex items-center space-x-2">
                       <Badge variant="default">Confirmed</Badge>
-                      <Badge variant={booking.paymentStatus === "Paid" ? "success" : "destructive"}>
+                      <Badge variant={booking.paymentStatus === "PAID" ? "success" : "destructive"}>
                         {booking.paymentStatus}
                       </Badge>
                     </div>
