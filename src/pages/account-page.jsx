@@ -178,6 +178,7 @@ const AccountPage = () =>{
                       </span>
                     </div>
                     <Badge variant="secondary">Confirmed</Badge>
+                    <Badge variant="secondary">{booking.paymentStatus}</Badge>
                   </div>
                 </CardContent>
                 <CardFooter className="px-4 py-3 bg-muted/20 flex justify-between">
