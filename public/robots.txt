@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://aidf-horizone-frontend-isuru.netlify.app/sitemap.xml
