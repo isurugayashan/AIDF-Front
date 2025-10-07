@@ -189,6 +189,7 @@ const AccountPage = () =>{
                   <Button
                     variant="outline"
                     size="sm"
+                    id="payBotton"
                     className="text-xs h-8"
                    onClick={() => navigate(`/booking/payment?bookingId=${booking._id}`)}
                   >
